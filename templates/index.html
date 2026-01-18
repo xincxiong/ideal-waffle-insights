@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ insights.date }} - AI行业洞察每日汇总</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <!-- 头部 -->
+        <header class="header">
+            <div class="header-content">
+                <h1 class="site-title">🧠 AI行业洞察每日汇总</h1>
+                <div class="date-selector-container">
+                    <label for="datePicker" class="date-label">📅 选择日期：</label>
+                    <input type="date" id="datePicker" class="date-picker" value="{{ insights.date | date_input }}">
+                    <button id="todayBtn" class="btn-today">今天</button>
+                </div>
+                <p class="date-display" id="currentDateDisplay">{{ insights.date }}</p>
+                <p class="subtitle">六大核心领域 · 权威来源 · 实时更新</p>
+            </div>
+        </header>
+
+        <!-- 目录导航栏 -->
+        <nav class="table-of-contents" id="toc">
+            <div class="toc-container">
+                <h3 class="toc-title">📋 目录</h3>
+                <ul class="toc-list">
+                    <li><a href="#enterprise-ai" class="toc-link">🤖 人工智能企业动态</a></li>
+                    <li><a href="#ai-agents" class="toc-link">🤝 智能体应用落地</a></li>
+                    <li><a href="#semiconductor" class="toc-link">💻 半导体行业动态</a></li>
+                    <li><a href="#gpu-computing" class="toc-link">⚡ 算力和政策</a></li>
+                    <li><a href="#ai-research" class="toc-link">🔬 AI算法研究前沿</a></li>
+                    <li><a href="#ai-experts" class="toc-link">👨‍🔬 人工智能专家动态</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- 主内容区 -->
+        <main class="main-content">
+            <!-- 一、人工智能企业动态 -->
+            <section class="insight-section" id="enterprise-ai">
+                <div class="section-header">
+                    <span class="section-icon">🤖</span>
+                    <h2 class="section-title">一、人工智能企业动态</h2>
+                </div>
+                <div class="insight-items">
+                    {% for item in insights.sections.enterprise_ai['items'][:8] %}
+                    <div class="insight-item {% if item.highlight %}highlight{% endif %}">
+                        <div class="item-header">
+                            <h3 class="item-title">{{ item.title }}</h3>
+                            {% if item.highlight %}<span class="badge">重要</span>{% endif %}
+                        </div>
+                        <p class="item-description">{{ item.description }}</p>
+                        <div class="item-meta">
+                            <span class="meta-label">影响：</span><span class="meta-value">{{ item.impact }}</span>
+                            <span class="meta-separator">|</span>
+                            <span class="meta-label">来源：</span><span class="meta-value">{{ item.source }}</span>
+                            <span class="meta-separator">|</span>
+                            <span class="meta-date">{{ item.date }}</span>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </section>
+
+            <!-- 二、智能体（AI Agent）应用落地 -->
+            <section class="insight-section" id="ai-agents">
+                <div class="section-header">
+                    <span class="section-icon">🤝</span>
+                    <h2 class="section-title">二、智能体（AI Agent）应用落地</h2>
+                </div>
+                <div class="insight-items">
+                    {% for item in insights.sections.ai_agents['items'][:8] %}
+                    <div class="insight-item {% if item.highlight %}highlight{% endif %}">
+                        <div class="item-header">
+                            <h3 class="item-title">{{ item.title }}</h3>
+                            {% if item.highlight %}<span class="badge">重要</span>{% endif %}
+                        </div>
+                        <p class="item-description">{{ item.description }}</p>
+                        <div class="item-meta">
+                            <span class="meta-label">影响：</span><span class="meta-value">{{ item.impact }}</span>
+                            <span class="meta-separator">|</span>
+                            <span class="meta-label">来源：</span><span class="meta-value">{{ item.source }}</span>
+                            <span class="meta-separator">|</span>
+                            <span class="meta-date">{{ item.date }}</span>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </section>
+
+            <!-- 三、半导体行业动态 -->
+            <section class="insight-section" id="semiconductor">
+                <div class="section-header">
+                    <span class="section-icon">💻</span>
+                    <h2 class="section-title">三、半导体行业动态</h2>
+                </div>
+                <div class="insight-items">
+                    {% for item in insights.sections.semiconductor['items'][:8] %}
+                    <div class="insight-item {% if item.highlight %}highlight{% endif %}">
+                        <div class="item-header">
+                            <h3 class="item-title">{{ item.title }}</h3>
+                            {% if item.highlight %}<span class="badge">重要</span>{% endif %}
+                        </div>
+                        <p class="item-description">{{ item.description }}</p>
+                        <div class="item-meta">
+                            <span class="meta-label">影响：</span><span class="meta-value">{{ item.impact }}</span>
+                            <span class="meta-separator">|</span>
+                            <span class="meta-label">来源：</span><span class="meta-value">{{ item.source }}</span>
+                            <span class="meta-separator">|</span>
+                            <span class="meta-date">{{ item.date }}</span>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </section>
+
+            <!-- 四、算力和政策 -->
+            <section class="insight-section" id="gpu-computing">
+                <div class="section-header">
+                    <span class="section-icon">⚡</span>
+                    <h2 class="section-title">四、算力和政策</h2>
+                </div>
+                <div class="insight-items">
+                    {% for item in insights.sections.gpu_computing['items'][:8] %}
+                    <div class="insight-item {% if item.highlight %}highlight{% endif %}">
+                        <div class="item-header">
+                            <h3 class="item-title">{{ item.title }}</h3>
+                            {% if item.highlight %}<span class="badge">重要</span>{% endif %}
+                        </div>
+                        <p class="item-description">{{ item.description }}</p>
+                        <div class="item-meta">
+                            <span class="meta-label">影响：</span><span class="meta-value">{{ item.impact }}</span>
+                            <span class="meta-separator">|</span>
+                            <span class="meta-label">来源：</span><span class="meta-value">{{ item.source }}</span>
+                            <span class="meta-separator">|</span>
+                            <span class="meta-date">{{ item.date }}</span>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </section>
+
+            <!-- 五、AI算法研究前沿 -->
+            <section class="insight-section" id="ai-research">
+                <div class="section-header">
+                    <span class="section-icon">🔬</span>
+                    <h2 class="section-title">五、AI算法研究前沿</h2>
+                </div>
+                <div class="insight-items">
+                    {% for item in insights.sections.ai_research['items'][:8] %}
+                    <div class="insight-item {% if item.highlight %}highlight{% endif %}">
+                        <div class="item-header">
+                            <h3 class="item-title">{{ item.title }}</h3>
+                            {% if item.highlight %}<span class="badge">重要</span>{% endif %}
+                        </div>
+                        <p class="item-description">{{ item.description }}</p>
+                        <div class="item-meta">
+                            <span class="meta-label">影响：</span><span class="meta-value">{{ item.impact }}</span>
+                            <span class="meta-separator">|</span>
+                            <span class="meta-label">来源：</span><span class="meta-value">{{ item.source }}</span>
+                            <span class="meta-separator">|</span>
+                            <span class="meta-date">{{ item.date }}</span>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </section>
+
+            <!-- 六、人工智能专家动态 -->
+            <section class="insight-section" id="ai-experts">
+                <div class="section-header">
+                    <span class="section-icon">👨‍🔬</span>
+                    <h2 class="section-title">六、人工智能专家动态</h2>
+                </div>
+                <div class="insight-items">
+                    {% for item in insights.sections.ai_experts['items'][:8] %}
+                    <div class="insight-item {% if item.highlight %}highlight{% endif %}">
+                        <div class="item-header">
+                            <h3 class="item-title">{{ item.title }}</h3>
+                            {% if item.highlight %}<span class="badge">重要</span>{% endif %}
+                        </div>
+                        <p class="item-description">{{ item.description }}</p>
+                        <div class="item-meta">
+                            <span class="meta-label">影响：</span><span class="meta-value">{{ item.impact }}</span>
+                            <span class="meta-separator">|</span>
+                            <span class="meta-label">来源：</span><span class="meta-value">{{ item.source }}</span>
+                            <span class="meta-separator">|</span>
+                            <span class="meta-date">{{ item.date }}</span>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </section>
+        </main>
+
+        <!-- 页脚 -->
+        <footer class="footer">
+            <p>数据来源：权威新闻、企业公告、行业报告及专家公开言论</p>
+            <p>更新时间：{{ insights.date }}</p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
+
